@@ -19,7 +19,7 @@
         </div>
         <nav class="main-nav">
             <ul>
-                <li><a href="home.php">HOME</a></li>
+                <li><a href="index.php">HOME</a></li>
                 <li><a href="katalog.php">ANDROID</a></li>
                 <li><a href="#">IPHONE</a></li>
                 <li><a href="#">LAPTOP</a></li>
@@ -55,3 +55,4 @@
         </div>
     </div>
 </section>
+
