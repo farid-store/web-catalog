@@ -1,0 +1,254 @@
+/* GLOBAL STYLES */
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #1a1a1a; /* Dark background */
+    color: #e0e0e0; /* Light text color */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.btn-primary {
+    display: inline-block;
+    padding: 10px 25px;
+    background-color: #fff;
+    color: #000;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #f0f0f0;
+}
+
+/* HEADER */
+header {
+    background-color: #1a1a1a;
+    padding: 20px 0;
+    border-bottom: 1px solid #333;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo h1 {
+    font-size: 24px;
+    margin: 0;
+    color: #fff;
+}
+
+.main-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+}
+
+.main-nav a {
+    text-decoration: none;
+    color: #a0a0a0;
+    font-size: 14px;
+    transition: color 0.3s;
+}
+
+.main-nav a:hover {
+    color: #fff;
+}
+
+.header-icons a {
+    color: #a0a0a0;
+    font-size: 18px;
+    margin-left: 20px;
+    transition: color 0.3s;
+}
+
+.header-icons a:hover {
+    color: #fff;
+}
+
+/* HERO SECTION */
+.hero-section {
+    background-image: url('https://via.placeholder.com/1600x800/222222/ffffff?text=HERO+BACKGROUND');
+    background-size: cover;
+    background-position: center;
+    padding: 100px 0;
+    color: #fff;
+}
+
+.hero-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.hero-left h2 {
+    font-size: 70px;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-top: 50px;
+}
+
+.lookbook-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 10px;
+    border-radius: 10px;
+    width: 250px;
+}
+
+.lookbook-card img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.lookbook-card p {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.4;
+    color: #ccc;
+}
+
+.lookbook-card p span {
+    font-size: 10px;
+}
+
+.hero-right {
+    text-align: right;
+}
+
+.featured-card {
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #000;
+    padding: 25px;
+    border-radius: 10px;
+    max-width: 300px;
+}
+
+.featured-card h4 {
+    margin-top: 0;
+    font-size: 18px;
+}
+
+.featured-card p {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #555;
+}
+
+/* PRODUCT COLLECTION SECTION */
+.collection-section {
+    background-color: #222;
+    padding: 50px 0;
+}
+
+.collection-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.collection-header h3 {
+    font-size: 40px;
+    line-height: 1.2;
+    margin: 0;
+}
+
+.collection-nav .nav-arrow {
+    background: none;
+    border: 1px solid #555;
+    color: #fff;
+    padding: 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.3s;
+}
+
+.collection-nav .nav-arrow:hover {
+    background-color: #444;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.product-card {
+    background-color: #333;
+    padding: 15px;
+    border-radius: 10px;
+    transition: transform 0.3s;
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+}
+
+.product-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.product-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.rating {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #000;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.product-card h4 {
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+.product-card p {
+    margin: 0;
+    font-size: 14px;
+    color: #a0a0a0;
+}
+
+.price-info {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.current-price {
+    color: #fff;
+}
+
+.old-price {
+    text-decoration: line-through;
+    color: #777;
+    font-weight: normal;
+    font-size: 14px;
+    margin-left: 10px;
+}

@@ -1,0 +1,554 @@
+/* banner.css */
+
+/* Variabel CSS untuk Warna dan Intensitas Blur */
+:root {
+    /* Diubah agar sesuai dengan tema gelap dari katalog.css */
+    --primary-blue: #ff4d6d; /* Mengubah warna primer menjadi aksen merah */
+    --light-blue: #ff6f91; /* Mengubah warna sekunder menjadi gradien */
+    --dark-text: #e0e0e0; /* Mengubah warna teks gelap menjadi terang */
+    --medium-text: #bbb; /* Mengubah warna teks sedang */
+    --light-bg: #121212; /* Mengubah background terang menjadi sangat gelap */
+    --card-bg: #222; /* Mengubah background kartu menjadi gelap */
+    --border-color: #333; /* Mengubah warna border menjadi abu-abu gelap */
+    --shadow-light: rgba(0, 0, 0, 0.4); /* Mengubah bayangan agar lebih menonjol di latar belakang gelap */
+    --shadow-medium: rgba(0, 0, 0, 0.6); /* Mengubah bayangan agar lebih kuat */
+    --blur-intensity: 5px; /* Intensitas blur untuk kartu testimoni */
+    --overlay-bg-opacity: 0.6; /* Opasitas overlay pada kartu testimoni */
+    /* NEW: Variabel untuk background right-section */
+    --right-section-bg-image-url: url('../produk/banner.webp'); /* <-- PATH GAMBAR ANDA DI SINI */
+    --right-section-bg-blur-intensity: 2px; /* <-- KONTROL BLUR BACKGROUND RIGHT-SECTION */
+    --right-section-bg-overlay-color: rgba(0, 0, 0, 0.6); /* <-- KONTROL OVERLAY WARNA BACKGROUND */
+}
+
+/* General Styles */
+body {
+    /* font-family: 'Lato', sans-serif; */
+    /* margin: 0; */
+    background-color: var(--light-bg); /* Menggunakan warna background gelap */
+    /* display: flex; /* Hapus ini dari body karena sudah ada struktur utama */
+    /* flex-direction: column; /* Hapus ini */
+    /* justify-content: flex-start; /* Hapus ini */
+    /* align-items: center; /* Hapus ini */
+    /* min-height: 100vh; */
+    overflow-x: hidden; /* Penting untuk mencegah scrollbar horizontal dari full-width-wrapper */
+    /* line-height: 1.6; */
+    color: var(--dark-text); /* Menggunakan warna teks terang */
+    /* padding-top: 0; /* Hapus padding-top dari body, atur di elemen lain jika perlu */
+}
+
+/* Slider Control (Hidden by default, used for logic) */
+.slider-control {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--card-bg); /* Menggunakan warna background kartu gelap */
+    padding: 15px 25px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px var(--shadow-light);
+    font-size: 0.9em;
+    color: var(--dark-text); /* Menggunakan warna teks terang */
+    visibility: hidden;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+    overflow: hidden;
+}
+
+/* Banner Container */
+.banner-container {
+    display: flex;
+    background-color: var(--card-bg); /* Menggunakan warna background kartu gelap */
+    box-shadow: 0 15px 40px var(--shadow-medium);
+    width: 100%; /* Tetap 100% dari parent-nya (.full-screen-banner-wrapper) */
+    max-height: 500px;
+    height: 500px;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    border-radius: 0;
+    flex-shrink: 0;
+}
+
+/* Left section - Text content */
+.left-section {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--card-bg); /* Menggunakan warna background kartu gelap */
+    z-index: 2;
+    transition: flex-basis 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.left-section h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.2em;
+    color: #fff; /* Menggunakan warna teks putih */
+    margin-bottom: 15px;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+}
+
+.left-section p {
+    font-size: 0.95em;
+    color: var(--medium-text); /* Menggunakan warna teks sedang */
+    margin-bottom: 25px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.left-section .button-link {
+    display: inline-block;
+    background: linear-gradient(45deg, #ff4d6d, #ff6f91); /* Mengubah tombol menjadi gradien merah */
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95em;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 8px 20px rgba(255, 77, 109, 0.3); /* Mengubah bayangan tombol menjadi merah */
+    white-space: nowrap;
+    align-self: flex-start;
+}
+
+.left-section .button-link:hover {
+    background-color: #d13f5c; /* Menyesuaikan warna hover */
+    transform: translateY(-3px);
+}
+
+/* Right section - Testimonials/Results */
+.right-section {
+    padding: 20px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 15px;
+    background-color: transparent;
+    position: relative;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    transition: flex-basis 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.right-section::-webkit-scrollbar {
+    display: none;
+}
+
+/* Pseudo-element untuk Gambar Background yang di-blur */
+.right-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: var(--right-section-bg-image-url);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(var(--right-section-bg-blur-intensity));
+    z-index: 0;
+    transition: filter 0.7s ease-out;
+}
+
+/* Pseudo-element untuk Overlay Warna di atas gambar background */
+.right-section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--right-section-bg-overlay-color);
+    z-index: 1;
+}
+
+/* Subtle phone graphic (Sekarang di lapisan ketiga dari bawah) */
+.right-section .phone-graphic {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(20deg);
+    width: 300px;
+    height: 300px;
+    background-color: rgba(255, 255, 255, 0.05); /* Mengubah warna agar cocok dengan tema gelap */
+    border-radius: 40px;
+    box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+    white-space: normal;
+}
+
+/* --- TESTIMONIAL CARD STYLES --- */
+.banner-testimonial-card {
+    background-color: var(--card-bg); /* Menggunakan warna background kartu gelap */
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 8px 20px var(--shadow-light);
+    width: 180px;
+    height: auto;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid var(--border-color); /* Menggunakan warna border gelap */
+    margin-top: auto;
+    margin-bottom: auto;
+    overflow: hidden;
+    cursor: pointer;
+    color: var(--light-text);
+}
+
+.banner-testimonial-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 12px 30px var(--shadow-medium);
+}
+.banner-testimonial-card.blurred:hover {
+    transform: none;
+    box-shadow: 0 8px 20px var(--shadow-light);
+}
+
+.banner-testimonial-card.result-card {
+    background: linear-gradient(45deg, #ff4d6d, #ff6f91); /* Mengubah warna gradien */
+    color: #fff;
+    box-shadow: 0 12px 30px rgba(255, 77, 109, 0.4);
+    justify-content: center;
+    height: 280px;
+    border: none;
+    transform: translateY(0) !important;
+    margin-left: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    cursor: default;
+}
+
+.banner-testimonial-card.result-card:hover {
+    box-shadow: 0 12px 30px rgba(255, 77, 109, 0.4);
+    transform: none;
+}
+
+.banner-testimonial-card .dot {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 10px;
+    height: 10px;
+    background-color: var(--primary-blue); /* Menggunakan aksen merah */
+    border-radius: 50%;
+    border: 2px solid var(--card-bg); /* Mengubah border menjadi warna background kartu */
+    z-index: 4;
+}
+
+.banner-testimonial-card.result-card .dot {
+    background-color: #fff;
+    border: none;
+}
+
+/* Image Container for Full-face image */
+.banner-testimonial-card .card-image-container {
+    width: 100%;
+    height: auto;
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px 15px 0 0;
+}
+
+.banner-testimonial-card .card-image {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+    z-index: 1;
+    aspect-ratio: 1 / 1;
+    transition: filter 0.5s ease-out;
+}
+
+/* Name Container with Blur Background - Pojok Kiri */
+.banner-testimonial-card .name-container {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    z-index: 3;
+    background-color: rgba(0, 0, 0, 0.5); /* Mengubah warna background blur menjadi gelap */
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    padding: 5px 10px;
+    border-radius: 35px;
+    white-space: nowrap;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+    transform: none;
+    transition: opacity 0.5s ease-out, filter 0.5s ease-out;
+}
+
+.banner-testimonial-card .name-container h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1em;
+    color: var(--light-text); /* Menggunakan warna teks terang */
+    margin: 0;
+    font-weight: 600;
+}
+
+/* Content area below the image */
+.banner-testimonial-card .card-content {
+    width: 100%;
+    padding: 15px;
+    background-color: var(--card-bg); /* Menggunakan warna background kartu gelap */
+    border-radius: 0 0 15px 15px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    transition: opacity 0.5s ease-out, filter 0.5s ease-out;
+}
+
+.banner-testimonial-card p.stats {
+    font-size: 0.85em;
+    color: var(--medium-text); /* Menggunakan warna teks sedang */
+    font-weight: 600;
+    line-height: 1.4;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
+}
+
+/* --- BLURRED CARD EFFECT --- */
+.banner-testimonial-card.blurred .card-image {
+    filter: blur(var(--blur-intensity));
+}
+
+.banner-testimonial-card.blurred .name-container,
+.banner-testimonial-card.blurred .card-content {
+    opacity: 0;
+    filter: blur(var(--blur-intensity));
+}
+
+.banner-testimonial-card .overlay-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Opasitas overlay lebih gelap */
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1em;
+    font-weight: 600;
+    text-align: center;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 15px;
+    opacity: 0;
+    transition: opacity 0.5s ease-out;
+    z-index: 5;
+}
+
+.banner-testimonial-card.blurred .overlay-text {
+    opacity: 1;
+}
+
+/* Result Card adjustments */
+.banner-testimonial-card.result-card .card-image-container,
+.banner-testimonial-card.result-card .name-container,
+.banner-testimonial-card.result-card .card-content,
+.banner-testimonial-card.result-card .overlay-text {
+    display: none;
+}
+
+.banner-testimonial-card.result-card h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.8em;
+    color: #fff;
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+}
+
+.banner-testimonial-card.result-card p:first-of-type {
+    font-size: 0.9em;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0;
+    padding: 0 15px;
+}
+
+/* Footer like elements */
+.FaridStore-logo, .reseller-text {
+    position: absolute;
+    bottom: 15px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    color: var(--medium-text); /* Menggunakan warna teks sedang */
+    font-size: 0.85em;
+    opacity: 0.6;
+    letter-spacing: 0.05em;
+    z-index: 2;
+}
+
+.FaridStore-logo {
+    left: 40px;
+}
+
+.reseller-text {
+    right: 40px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .left-section h1 {
+        font-size: 2em;
+    }
+    .left-section p {
+        font-size: 0.9em;
+    }
+    .banner-testimonial-card {
+        width: 170px;
+    }
+    .banner-testimonial-card .name-container h3 {
+        font-size: 0.9em;
+    }
+    .banner-testimonial-card p.stats {
+        font-size: 0.8em;
+    }
+    .banner-testimonial-card .overlay-text {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 992px) {
+    .left-section h1 {
+        font-size: 1.8em;
+    }
+    .left-section p {
+        -webkit-line-clamp: 2;
+    }
+    .banner-testimonial-card {
+        width: 160px;
+    }
+    .banner-testimonial-card .name-container h3 {
+        font-size: 0.85em;
+    }
+    .banner-testimonial-card p.stats {
+        font-size: 0.75em;
+    }
+    .banner-testimonial-card .overlay-text {
+        font-size: 0.95em;
+    }
+}
+
+@media (max-width: 768px) {
+    .slider-control {
+        display: none;
+    }
+    body {
+        padding-top: 0;
+    }
+    .banner-container {
+        flex-direction: column;
+        height: auto;
+        max-height: none;
+        border-radius: 10px;
+        margin: 20px;
+        width: calc(100% - 40px);
+    }
+    .left-section, .right-section {
+        flex: none;
+        width: 100%;
+        padding: 30px;
+        text-align: center;
+        align-items: center;
+        background-image: none; /* Hapus background image pada right-section di mobile */
+    }
+    /* Sembunyikan pseudo-elements untuk background blur dan overlay pada mobile */
+    .right-section::before,
+    .right-section::after,
+    .right-section .phone-graphic { /* Sembunyikan juga div phone-graphic di mobile */
+        display: none;
+    }
+    .left-section h1 {
+        font-size: 2em;
+    }
+    .right-section {
+        padding: 20px;
+        overflow-x: auto;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+    .banner-testimonial-card {
+        width: 180px;
+        min-height: auto;
+        margin-left: 0;
+        margin-right: 15px;
+        white-space: normal;
+    }
+    .banner-testimonial-card:last-child {
+        margin-right: 0;
+    }
+    .FaridStore-logo, .reseller-text {
+        position: static;
+        margin-top: 15px;
+        text-align: center;
+        display: block;
+        width: 100%;
+    }
+    .banner-testimonial-card.blurred:hover {
+        transform: none;
+        box-shadow: 0 8px 20px var(--shadow-light);
+    }
+}
+
+@media (max-width: 480px) {
+    .left-section {
+        padding: 20px 15px;
+    }
+    .left-section h1 {
+        font-size: 1.6em;
+        margin-bottom: 10px;
+    }
+    .left-section p {
+        font-size: 0.85em;
+        -webkit-line-clamp: 3;
+        margin-bottom: 20px;
+    }
+    .left-section .button-link {
+        padding: 10px 20px;
+        font-size: 0.9em;
+    }
+    .right-section {
+        padding: 15px;
+        gap: 10px;
+    }
+    .banner-testimonial-card {
+        width: 160px;
+    }
+    .banner-testimonial-card .name-container {
+        top: 8px;
+        left: 8px;
+        padding: 4px 8px;
+        border-radius: 6px;
+    }
+    .banner-testimonial-card .name-container h3 {
+        font-size: 0.8em;
+    }
+    .banner-testimonial-card p.stats {
+        font-size: 0.75em;
+    }
+    .banner-testimonial-card .overlay-text {
+        font-size: 0.9em;
+    }
+}
